@@ -60,21 +60,19 @@ public class VeiculoDao extends Dao{
         return buscar.getResultList();
     }
 
-    //condicionando crud conforme campo da tabela, no caso aqui o Id
     public Veiculo getVeiculoById(long id) {
         return (Veiculo) ler(Veiculo.class, id);
     }
 
-    public void removeVeiculo(int id) {
-        Veiculo oVeiculo = getVeiculoById(id);
-        //chama o método remove do dao genérico
-        remover(oVeiculo);
+    public void removeVeiculo(long id) {
+        Veiculo veiculo = getVeiculoById(id);
+        remover(veiculo);
     }
 
-    public void modificarVeiculo(Veiculo oVeiculo) {
-        Veiculo valida = getVeiculoById(oVeiculo.getId());
+    public void modificarVeiculo(Veiculo veiculo) {
+        Veiculo valida = getVeiculoById(veiculo.getId());
         if (valida != null) {
-            update(oVeiculo);
+            update(veiculo);
         }
     }
 }

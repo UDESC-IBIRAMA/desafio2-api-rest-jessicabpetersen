@@ -16,7 +16,6 @@ import javax.persistence.Persistence;
 public class Dao {
     
     public static void salvar(Object objeto) {
-        //Nome que está no persistencia.xml
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("DswJpa");
 
         EntityManager em = emf.createEntityManager();

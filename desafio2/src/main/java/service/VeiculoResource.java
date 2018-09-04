@@ -51,17 +51,18 @@ public class VeiculoResource {
     }
     
      @GET
-    @Path("/getId/{id}")
+    @Path("/Id/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Veiculo buscaVeiculoId(@PathParam("id") int idVehicle) {
-        Veiculo oVeiculo = null;
+    public Veiculo buscaVeiculoId(@PathParam("id") int id) {
+        Veiculo veiculo = null;
         try {
-            oVeiculo = persistencia.getVeiculoById(idVehicle);
+            veiculo = persistencia.getVeiculoById(id);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return oVeiculo;
+        return veiculo;
     }
+    
     
     @GET
     @Path("/{tipo}/{montadora}/{km}")
@@ -100,18 +101,7 @@ public class VeiculoResource {
         return veiculos;
     }
     
-    @GET
-    @Path("/{motor}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Veiculo> buscaVeiculoMotor(@PathParam("motor") String motor) {
-        List<Veiculo> veiculos = null;
-        try {
-            veiculos = persistencia.buscarVeiculoByoMotor(motor);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return veiculos;
-    }
+   
 
     /**
      * PUT method for updating or creating an instance of VeiculoResource
@@ -129,22 +119,19 @@ public class VeiculoResource {
     }
     
     @POST
-    @Path("/addViculo")
+    @Path("/adicionarVeiculo")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
-    public String adicionarVeiculo(Veiculo model) {
-        String feedback = "";
+    public void adicionarVeiculo(Veiculo model) {
         try {
             persistencia.salvar(model);
-            return "Veículo inserido com sucesso";
         } catch (Exception e) {
             e.printStackTrace();
-            return "Erro ao inserir dados!\n" + e.getMessage();
         }
     }
     
      @DELETE
-    @Path("/deletar/{id}")
+    @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public void deletarVeiculo(@PathParam("id") int id) {
         try {
